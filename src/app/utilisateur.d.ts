@@ -4,4 +4,5 @@ export interface Utilisateur {
     prenom: string;
     image: string;
     mot_de_passe: string;
+    competences: string[];
 }

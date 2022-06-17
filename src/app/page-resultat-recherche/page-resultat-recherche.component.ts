@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { Utilisateur } from '../utilisateur';
 
 @Component({
   selector: 'app-page-resultat-recherche',
@@ -10,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PageResultatRechercheComponent implements OnInit {
 
   public listeUtilisateur: any = [];
+  public adresseServeur = environment.adresseServeur;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +23,7 @@ export class PageResultatRechercheComponent implements OnInit {
     this.route.params.subscribe(
       parametres => {
         this.client.get(
-          "http://localhost/backend-angular-dw1-22/recherche.php"
+          "http://" + environment.adresseServeur + "recherche.php"
           + "?recherche=" + parametres['recherche'])
 
           .subscribe(reponse => this.listeUtilisateur = reponse)
@@ -31,13 +34,13 @@ export class PageResultatRechercheComponent implements OnInit {
 
   rechargerListeUtilisateur() {
     this.client
-      .get("http://localhost/backend-angular-dw1-22/liste-utilisateur.php")
+      .get("http://" + environment.adresseServeur + "liste-utilisateur.php")
       .subscribe(reponse => this.listeUtilisateur = reponse)
   }
 
-  onClickDelete(idUtilisateur: number) {
+  onClicDeleteUtilisateur(utilisateur: Utilisateur) {
     this.client
-      .get("http://localhost/backend-angular-dw1-22/supprime-utilisateur.php?id=" + idUtilisateur)
+      .get("http://" + environment.adresseServeur + "supprime-utilisateur.php?id=" + utilisateur.id)
       .subscribe(reponse => this.rechargerListeUtilisateur())
   }
 

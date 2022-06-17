@@ -4,38 +4,8 @@
   </a>
 
   <div class="row gy-4 mt-4">
-    <div class="col-6" *ngFor="let utilisateur of listeUtilisateur">
-      <mat-card>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>
-            {{ utilisateur.nom }} {{ utilisateur.prenom }}
-          </mat-card-title>
-          <mat-card-subtitle>Simple utilisateur</mat-card-subtitle>
-        </mat-card-header>
-        <img
-          mat-card-image
-          src="http://localhost/backend-angular-dw1-22/uploads/{{ utilisateur.image }}"
-          alt="Photo of a Shiba Inu"
-        />
-        <mat-card-content>
-          <ul>
-            <li *ngFor="let comp of utilisateur.competences">{{ comp }}</li>
-          </ul>
-        </mat-card-content>
-        <mat-card-actions>
-          <a mat-raised-button color="primary" [routerLink]="['/edition-utilisateur',utilisateur.id]">
-            <mat-icon>edit</mat-icon>
-          </a>
-          <button
-            mat-raised-button
-            (click)="onClickDelete(utilisateur.id)"
-            color="warn"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
+    <div class="col-6" *ngFor="let user of listeUtilisateur">
+      <app-carte-utilisateur [utilisateur]="user" (delete)="onClicDeleteUtilisateur($event);"></app-carte-utilisateur>
     </div>
   </div>
 </div>

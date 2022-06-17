@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PageNonTrouveComponent } from './page-non-trouve/page-non-trouve.component';
 import { PageResultatRechercheComponent } from './page-resultat-recherche/page-resultat-recherche.component';
+import { CarteUtilisateurComponent } from './carte-utilisateur/carte-utilisateur.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PageResultatRechercheComponent } from './page-resultat-recherche/page-r
     PageListeUtilisateurComponent,
     PageEditionUtilisateurComponent,
     PageNonTrouveComponent,
-    PageResultatRechercheComponent
+    PageResultatRechercheComponent,
+    CarteUtilisateurComponent
   ],
   imports: [
     BrowserModule,

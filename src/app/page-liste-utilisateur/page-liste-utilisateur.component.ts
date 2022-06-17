@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Utilisateur } from '../utilisateur';
 
 @Component({
   selector: 'app-page-liste-utilisateur',
@@ -9,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class PageListeUtilisateurComponent implements OnInit {
 
   public listeUtilisateur: any = [];
+  public adresseServeur = environment.adresseServeur;
 
   constructor(private client: HttpClient) { }
 
@@ -16,16 +19,15 @@ export class PageListeUtilisateurComponent implements OnInit {
     this.rechargerListeUtilisateur()
   }
 
-  rechargerListeUtilisateur(){
+  rechargerListeUtilisateur() {
     this.client
-      .get("http://localhost/backend-angular-dw1-22/liste-utilisateur.php")
+      .get("http://" + environment.adresseServeur + "liste-utilisateur.php")
       .subscribe(reponse => this.listeUtilisateur = reponse)
   }
 
-  onClickDelete(idUtilisateur: number) {
+  onClicDeleteUtilisateur(utilisateur: Utilisateur) {
     this.client
-      .get("http://localhost/backend-angular-dw1-22/supprime-utilisateur.php?id=" + idUtilisateur)
+      .get("http://" + environment.adresseServeur + "supprime-utilisateur.php?id=" + utilisateur.id)
       .subscribe(reponse => this.rechargerListeUtilisateur())
   }
-
 }

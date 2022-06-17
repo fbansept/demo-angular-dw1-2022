@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { Utilisateur } from '../utilisateur';
 
 @Component({
@@ -33,7 +34,7 @@ export class PageEditionUtilisateurComponent implements OnInit {
     this.route.params.subscribe(parametres => {
       if (parametres['id'] != null) {
         this.client.get<Utilisateur>(
-          "http://localhost/backend-angular-dw1-22/utilisateur.php?id=" + parametres['id']
+          "http://" + environment.adresseServeur + "utilisateur.php?id=" + parametres['id']
         ).subscribe((utilisateur: Utilisateur) => {
 
           // this.formulaire = this.formBuilder.group(
@@ -67,7 +68,7 @@ export class PageEditionUtilisateurComponent implements OnInit {
       formData.append("utilisateur", JSON.stringify(utilisateur))
 
       this.client.post(
-        "http://localhost/backend-angular-dw1-22/edition-utilisateur.php",
+        "http://" + environment.adresseServeur + "edition-utilisateur.php",
         formData,
         { responseType: 'text' }
       ).subscribe(resultat => this.router.navigateByUrl("liste-utilisateur"));
