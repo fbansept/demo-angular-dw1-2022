@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo-angular-dw1-22';
+
+  @ViewChild("recherche")
+  private inputRecherche: ElementRef | undefined;
+
+  constructor(private router: Router) { }
+
+  onSubmit() {
+
+    const recherche = this.inputRecherche?.nativeElement.value
+
+    if (recherche) {
+      this.router.navigate(["resultat-recherche", recherche])
+    }
+
+  }
 }

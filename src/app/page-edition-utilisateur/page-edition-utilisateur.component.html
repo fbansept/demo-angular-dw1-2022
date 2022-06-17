@@ -1,0 +1,57 @@
+<form
+  [formGroup]="formulaire"
+  (ngSubmit)="onSubmit()"
+  class="d-flex flex-column container mt-4"
+>
+  <mat-form-field appearance="fill">
+    <mat-label>Prénom</mat-label>
+    <input matInput formControlName="prenom" />
+    <mat-error *ngIf="formulaire.get('prenom')?.hasError('required')">
+      Le prénom est obligatoire
+    </mat-error>
+    <mat-error *ngIf="formulaire.get('prenom')?.hasError('minlength')">
+      Minimum 3 caractères
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nom</mat-label>
+    <input matInput formControlName="nom" />
+    <mat-error *ngIf="formulaire.get('nom')?.hasError('required')">
+      Le nom est obligatoire
+    </mat-error>
+    <mat-error *ngIf="formulaire.get('nom')?.hasError('minlength')">
+      Minimum 3 caractères
+    </mat-error>
+  </mat-form-field>
+
+  <input
+    #fileInput
+    type="file"
+    class="d-none"
+    (change)="onChangeFile($event)"
+  />
+
+  <div>
+    {{ image?.name || 'Aucune image selectionnée' }}
+
+    <button (click)="fileInput.click();$event.preventDefault()" mat-mini-fab color="primary">
+      <mat-icon>image</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Mot de passe</mat-label>
+    <input matInput type="password" formControlName="mot_de_passe" />
+    <mat-error>Le mot de passe est obligatoire</mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!formulaire.valid"
+  >
+    Enregistrer
+  </button>
+</form>
